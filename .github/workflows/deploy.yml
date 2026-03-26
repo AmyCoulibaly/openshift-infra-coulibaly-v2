@@ -19,3 +19,6 @@ jobs:
 
       - name: Etape 2 - Services (Pod DB)
         run: oc apply -f 02-services/
+
+      - name: Etape 3 - Reseau et Securite
+        run: oc apply -f 03-reseau/
