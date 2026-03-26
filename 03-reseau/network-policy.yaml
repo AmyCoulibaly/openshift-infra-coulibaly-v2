@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-vms-to-db
+  namespace: bbamycoulibaly-dev
+spec:
+  podSelector:
+    matchLabels:
+      app: mysql # Cible le Pod de la base de données
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector: {} # Autorise les flux internes du projet
+    ports:
+    - protocol: TCP
+      port: 3306 # Autorise uniquement le port MySQL
