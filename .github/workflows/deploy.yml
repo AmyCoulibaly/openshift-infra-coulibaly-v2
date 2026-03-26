@@ -1,0 +1,19 @@
+name: Deploy-Infra-Coulibaly-V2
+on: [push] # Se lance à chaque fois que tu enregistres un fichier
+jobs:
+  openshift-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v2
+
+      - name: Installation de l'outil OC
+        uses: redhat-actions/oc-installer@v1
+
+      - name: Connexion au Sandbox de Ndeye Amy
+        run: |
+          oc login --token=${{ secrets.OC_TOKEN }} --server=${{ secrets.OC_SERVER }} --insecure-skip-tls-verify
+          
+      - name: Verification du projet
+        run: |
+          oc project # Cette commande vérifie juste si on est bien connecté
