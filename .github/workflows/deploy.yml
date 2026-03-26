@@ -14,7 +14,8 @@ jobs:
         run: |
           oc login --token=${{ secrets.OC_TOKEN }} --server=${{ secrets.OC_SERVER }} --insecure-skip-tls-verify
           
-      - name: Deploiement des VMs
-        run: |
-          # Cette commande installe tout ce qui est dans le dossier virtualisation
-          oc apply -f 01-virtualisation/
+      - name: Etape 1 - Virtualisation
+        run: oc apply -f 01-virtualisation/
+
+      - name: Etape 2 - Services (Pod DB)
+        run: oc apply -f 02-services/
