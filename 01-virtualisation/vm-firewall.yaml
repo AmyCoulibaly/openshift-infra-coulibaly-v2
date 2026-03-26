@@ -20,7 +20,7 @@ spec:
           resources:
             requests:
               storage: 30Gi
-  runStrategy: Always
+  runStrategy: Manual
   template:
     metadata:
       labels:
