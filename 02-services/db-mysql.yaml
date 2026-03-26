@@ -23,6 +23,13 @@ spec:
           value: "AmyPass2026"
         ports:
         - containerPort: 3306
+        # --- SECTION AJOUTÉE POUR LIMITER LA RAM ---
+        resources:
+          requests:
+            memory: "512Mi"
+          limits:
+            memory: "1Gi"
+        # ------------------------------------------
 ---
 apiVersion: v1
 kind: Service
