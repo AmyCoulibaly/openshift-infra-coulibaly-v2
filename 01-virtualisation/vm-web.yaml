@@ -16,6 +16,11 @@ spec:
         cpu:
           cores: 1
         devices:
+          interfaces:
+            - name: default
+              masquerade: {}
+              ports:
+                - port: 80
           disks:
             - bootOrder: 1
               disk:
@@ -26,6 +31,9 @@ spec:
               name: cloudinitdisk
         memory:
           guest: 1Gi
+      networks:
+        - name: default
+          pod: {}
       volumes:
         - containerDisk:
             image: quay.io/containerdisks/ubuntu:22.04
