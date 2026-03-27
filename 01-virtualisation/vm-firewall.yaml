@@ -50,3 +50,17 @@ spec:
                 - iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
                 - service iptables save
           name: cloudinitdisk
+  dataVolumeTemplates:
+    - apiVersion: cdi.kubevirt.io/v1beta1
+      kind: DataVolume
+      metadata:
+        name: fedora-pink-mite-53
+      spec:
+        sourceRef:
+          kind: DataSource
+          name: fedora
+          namespace: openshift-virtualization-os-images
+        storage:
+          resources:
+            requests:
+              storage: 10Gi
