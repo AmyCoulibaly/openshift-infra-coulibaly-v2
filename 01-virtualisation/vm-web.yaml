@@ -53,3 +53,5 @@ spec:
                 - echo "<h1>Serveur Web VM2 (DMZ) - Projet Amy</h1>" > /var/www/html/index.html
                 - echo "Serveur operationnel" >> /var/www/html/status.txt
           name: cloudinitdisk
+
+          
