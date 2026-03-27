@@ -16,6 +16,10 @@ spec:
       domain:
         cpu:
           cores: 1
+        resources:
+          overcommitGuestOverhead: true # <--- TRÈS IMPORTANT
+          requests:
+            memory: 512Mi
         devices:
           interfaces:
             - name: default
@@ -31,7 +35,7 @@ spec:
                 bus: virtio
               name: cloudinitdisk
         memory:
-          guest: 512Mi # Minimum absolu
+          guest: 512Mi
       networks:
         - name: default
           pod: {}
