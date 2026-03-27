@@ -5,7 +5,7 @@ metadata:
   namespace: bbamycoulibaly-dev
   labels:
     app: vm-web
-    kubevirt.io/domain: vm2 # <-- CETTE LIGNE EST LA CLÉ !
+    kubevirt.io/domain: vm2
 spec:
   runStrategy: Manual
   template:
@@ -31,7 +31,7 @@ spec:
                 bus: virtio
               name: cloudinitdisk
         memory:
-          guest: 1Gi
+          guest: 700Mi # On baisse ici pour éviter le crash
       networks:
         - name: default
           pod: {}
@@ -46,9 +46,10 @@ spec:
               password: AmyPass2026
               chpasswd: { expire: False }
               ssh_pwauth: True
-              packages:
-                - nginx
+              # On garde juste l'essentiel
               runcmd:
+                - apt-get update
+                - apt-get install -y nginx
                 - systemctl enable --now nginx
                 - echo "<h1>Serveur Web VM2 (DMZ) - Projet Amy</h1>" > /var/www/html/index.html
           name: cloudinitdisk
