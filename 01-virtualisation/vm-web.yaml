@@ -31,7 +31,7 @@ spec:
                 bus: virtio
               name: cloudinitdisk
         memory:
-          guest: 700Mi # On baisse ici pour éviter le crash
+          guest: 512Mi # Minimum absolu
       networks:
         - name: default
           pod: {}
@@ -46,10 +46,4 @@ spec:
               password: AmyPass2026
               chpasswd: { expire: False }
               ssh_pwauth: True
-              # On garde juste l'essentiel
-              runcmd:
-                - apt-get update
-                - apt-get install -y nginx
-                - systemctl enable --now nginx
-                - echo "<h1>Serveur Web VM2 (DMZ) - Projet Amy</h1>" > /var/www/html/index.html
           name: cloudinitdisk
