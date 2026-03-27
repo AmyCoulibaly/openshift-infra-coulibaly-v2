@@ -15,16 +15,12 @@ spec:
     spec:
       domain:
         cpu:
-          sockets: 1
           cores: 1
-          threads: 1
         resources:
           requests:
-            memory: 600Mi
-            cpu: 100m # On demande très peu de CPU au démarrage
+            memory: 600Mi # On demande peu
           limits:
-            memory: 600Mi
-            cpu: 500m
+            memory: 750Mi # On interdit de dépasser 750
         devices:
           interfaces:
             - name: default
@@ -40,7 +36,7 @@ spec:
                 bus: virtio
               name: cloudinitdisk
         memory:
-          guest: 600Mi
+          guest: 650Mi
       networks:
         - name: default
           pod: {}
