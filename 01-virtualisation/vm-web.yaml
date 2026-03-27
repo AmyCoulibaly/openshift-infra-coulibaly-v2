@@ -40,8 +40,6 @@ spec:
               # INSTALLATION AUTOMATIQUE
               packages:
                 - nginx
-                - nodejs
-                - npm
               runcmd:
                 - systemctl enable --now nginx
                 - echo "<h1>Serveur Web VM2 (DMZ) - Projet Amy</h1>" > /var/www/html/index.html
