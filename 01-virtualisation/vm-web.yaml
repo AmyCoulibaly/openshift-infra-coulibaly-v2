@@ -4,22 +4,8 @@ metadata:
   name: vm2
   namespace: bbamycoulibaly-dev
   labels:
-    app: vm2
+    app: vm-web
 spec:
-  dataVolumeTemplates:
-    - apiVersion: cdi.kubevirt.io/v1beta1
-      kind: DataVolume
-      metadata:
-        name: vm2
-      spec:
-        sourceRef:
-          kind: DataSource
-          name: fedora
-          namespace: openshift-virtualization-os-images
-        storage:
-          resources:
-            requests:
-              storage: 30Gi
   runStrategy: Manual
   template:
     metadata:
@@ -38,23 +24,26 @@ spec:
             - disk:
                 bus: virtio
               name: cloudinitdisk
-          interfaces:
-            - masquerade: {}
-              model: virtio
-              name: default
         memory:
           guest: 1Gi
-      networks:
-        - name: default
-          pod: {}
       volumes:
-        - dataVolume:
-            name: vm2
+        - containerDisk:
+            image: quay.io/containerdisks/ubuntu:22.04
           name: rootdisk
         - cloudInitNoCloud:
             userData: |
               #cloud-config
-              user: fedora
-              password: rji4-06jk-15ny
+              user: ubuntu
+              password: AmyPass2026
               chpasswd: { expire: False }
+              ssh_pwauth: True
+              # INSTALLATION AUTOMATIQUE
+              packages:
+                - nginx
+                - nodejs
+                - npm
+              runcmd:
+                - systemctl enable --now nginx
+                - echo "<h1>Serveur Web VM2 (DMZ) - Projet Amy</h1>" > /var/www/html/index.html
+                - echo "Serveur operationnel" >> /var/www/html/status.txt
           name: cloudinitdisk
